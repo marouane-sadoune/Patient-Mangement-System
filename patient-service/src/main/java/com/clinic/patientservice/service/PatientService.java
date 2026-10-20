@@ -1,5 +1,6 @@
 package com.clinic.patientservice.service;
 
+import com.clinic.patientservice.dto.PatientRequestDTO;
 import com.clinic.patientservice.dto.PatientResponseDTO;
 import com.clinic.patientservice.mapper.PatientMapper;
 import com.clinic.patientservice.model.Patient;
@@ -28,4 +29,9 @@ public class PatientService {
                 .map(PatientMapper::toDTO).toList();// Lambda can be replaced with method reference  PatientMapper.toDTO(patient)
     }
 
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+        Patient newPatient = patientRepository.save(
+                PatientMapper.toModel(patientRequestDTO));
+        return PatientMapper.toDTO(newPatient);
+    }
 }
