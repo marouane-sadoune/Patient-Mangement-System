@@ -1,5 +1,7 @@
 package com.clinic.patientservice.dto;
 
+import com.clinic.patientservice.dto.validators.CreatePatientValidationGroup;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,9 +22,11 @@ public class PatientRequestDTO {
     private String address;
 
     @NotBlank(message = "Date of Birth required")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String dateOfBirth;
 
-    @NotNull(message = "Registered date is required")
+    @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registered date is required")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String registeredDate;
 
     public @NotBlank(message = "Name is required") @Size(max = 100, message = "Name cannot exceed 100 characters") String getName() {

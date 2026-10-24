@@ -3,8 +3,8 @@ POST http://localhost:4000/patients
 Content-Type: application/json
 
 {
-  "name": "zakaria benani",
-
+  "name": "zakaria hbil",
+  "email": "zakaria.hbil@example.com",
   "address": "28 Avenue Kennedy, jdida, Maroc",
   "dateOfBirth": "1995-09-09",
   "registeredDate": "2023-09-19"
