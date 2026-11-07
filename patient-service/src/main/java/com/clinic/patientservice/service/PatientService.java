@@ -40,7 +40,7 @@ public class PatientService {
     public PatientResponseDTO updatePatient(UUID id, PatientRequestDTO patientRequestDTO) {
         Patient patient = patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundExecption("Patient Not found ID: " + id));
 
-        if (patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+        if (patientRepository.existsByEmailAndIdNot(patientRequestDTO.getEmail(), id)) {
             throw new EmailAlreadyExistsException("A patient with this email" + "already exist" + patientRequestDTO.getEmail());
         }
 
@@ -53,4 +53,11 @@ public class PatientService {
         Patient updatePatient =  patientRepository.save(patient);
         return PatientMapper.toDTO(updatePatient);
     }
+
+    public void deletePatient(UUID id) {
+        patientRepository.deleteById(id);
+    }
+
+
+
 }
